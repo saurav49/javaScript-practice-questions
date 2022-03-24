@@ -68,7 +68,6 @@ let obj = {
   company: "Ridecell",
   mentor: "Tanay",
 };
-let newObj = {};
 const redditComments = [
   {
     content: "comment1",
@@ -98,6 +97,7 @@ const redditComments = [
     ],
   },
 ];
+let newObj = {};
 const deepCopy = (obj, parent) => {
   // METHOD-01 BY USING FOR IN
   for (key in obj) {
@@ -139,12 +139,68 @@ const flattenCopy = (arr) => {
   }
 };
 flattenCopy(flattenArr);
-deepCopy(redditComments, "");
+deepCopy(obj, "");
 
-console.log("DEEP_COPY__OBJ", newObj);
-console.log("DEEP_COPY__ARR", newArr);
-// console.log("PRINT_DELAY", printDelay(array));
-// console.log("TIMEBOMB", timeBomb());
-console.log("#1", countAllVowels(str));
-console.log("#2", reverseReverse(str));
-console.log("#8", capitalizeFirstWord(str));
+const str1 =
+  "The-quick-brown-fox-jumps-over-the-lazy-dog.-If-the-dog-reacted,-was-it-really-lazy?";
+
+// REPLACE A STRING
+function myReplace(str, regexp, newWord) {
+  const strArr = str.split(" ");
+  let newStr = "";
+  for (str of strArr) {
+    if (regexp.test(str)) {
+      newStr += ` ${newWord}`;
+    } else {
+      newStr += ` ${str}`;
+    }
+  }
+  return newStr;
+}
+function myReplaceByWord(str, oldWord, newWord) {
+  let newStr = "";
+  // const index = str.indexOf(oldWord);
+  // let newStr =
+  //   str.substring(0, index) + newWord + str.substring(index + oldWord.length);
+  const strArr = str.split(" ");
+  for (let str of strArr) {
+    if (str === oldWord) {
+      newStr += ` ${newWord}`;
+    } else {
+      newStr += ` ${str}`;
+    }
+  }
+  return newStr;
+}
+
+function mySplit(str, splitBy) {
+  let word = "";
+  let array = [];
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] !== splitBy) {
+      word += str[i];
+      if (i === str.length - 1) {
+        array.push(word);
+      }
+    } else {
+      array.push(word);
+      word = "";
+    }
+  }
+
+  return array;
+}
+
+console.log(myReplace(str1, /lazy/g, "sloth like"));
+console.log("replace", myReplaceByWord(str1, "lazy", "fast"));
+console.log("split", mySplit(str1, " "));
+
+// console.log("DEEP_COPY__OBJ", newObj);
+// console.log("DEEP_COPY__ARR", newArr);
+// console.log("PALLINDROME", isPallindrome("Dad"));
+// // console.log("PRINT_DELAY", printDelay(array));
+// // console.log("TIMEBOMB", timeBomb());
+// console.log("#1", countAllVowels(str));
+// console.log("#2", reverseReverse(str));
+// console.log("#8", capitalizeFirstWord(str));
