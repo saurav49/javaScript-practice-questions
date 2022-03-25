@@ -1,11 +1,30 @@
+// let count = 0;
+// const getData = () => {
+//   console.log("...fetching...", count++, inputEl.value);
+// };
+
+// const debounce = function (fn, d) {
+//   let timer;
+//   return function () {
+//     let context = this;
+//     args = arguments;
+//     clearTimeout(timer);
+//     timer = setTimeout(() => {
+//       fn.apply(context, args);
+//     }, d);
+//   };
+// };
+
+// const finalGetData = debounce(getData, 300);
+
 const inputEl = document.querySelector("#productname");
 
 let count = 0;
-const getData = () => {
-  console.log("...fetching...", count++, inputEl.value);
+const mockFetch = () => {
+  console.log(`...fetching...`, count++, inputEl.value);
 };
 
-const debounce = function (fn, d) {
+function debounced(fn, delay) {
   let timer;
   return function () {
     let context = this;
@@ -13,8 +32,23 @@ const debounce = function (fn, d) {
     clearTimeout(timer);
     timer = setTimeout(() => {
       fn.apply(context, args);
-    }, d);
+    }, delay);
   };
-};
+}
 
-const finalGetData = debounce(getData, 300);
+function throttle(fn, delay) {
+  let flag = true;
+  return function () {
+    let context = this;
+    args = arguments;
+    if (flag) {
+      fn.apply(context, args);
+      flag = false;
+      setTimeout(() => {
+        flag = true;
+      }, delay);
+    }
+  };
+}
+
+const getData = debounced(mockFetch, 300);

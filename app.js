@@ -126,75 +126,7 @@ const deepCopy = (obj, parent) => {
   // }
 };
 
-// FLATTEN AN ARRAY
-const flattenArr = [1, [2, [3, 4], 5], 6];
-let newArr = [];
-const flattenCopy = (arr) => {
-  for (ele of arr) {
-    if (typeof ele === "object") {
-      flattenCopy(ele);
-    } else {
-      newArr.push(ele);
-    }
-  }
-};
-flattenCopy(flattenArr);
 deepCopy(obj, "");
-
-const str1 =
-  "The-quick-brown-fox-jumps-over-the-lazy-dog.-If-the-dog-reacted,-was-it-really-lazy?";
-
-// REPLACE A STRING
-function myReplace(str, regexp, newWord) {
-  const strArr = str.split(" ");
-  let newStr = "";
-  for (str of strArr) {
-    if (regexp.test(str)) {
-      newStr += ` ${newWord}`;
-    } else {
-      newStr += ` ${str}`;
-    }
-  }
-  return newStr;
-}
-function myReplaceByWord(str, oldWord, newWord) {
-  let newStr = "";
-  // const index = str.indexOf(oldWord);
-  // let newStr =
-  //   str.substring(0, index) + newWord + str.substring(index + oldWord.length);
-  const strArr = str.split(" ");
-  for (let str of strArr) {
-    if (str === oldWord) {
-      newStr += ` ${newWord}`;
-    } else {
-      newStr += ` ${str}`;
-    }
-  }
-  return newStr;
-}
-
-function mySplit(str, splitBy) {
-  let word = "";
-  let array = [];
-
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] !== splitBy) {
-      word += str[i];
-      if (i === str.length - 1) {
-        array.push(word);
-      }
-    } else {
-      array.push(word);
-      word = "";
-    }
-  }
-
-  return array;
-}
-
-console.log(myReplace(str1, /lazy/g, "sloth like"));
-console.log("replace", myReplaceByWord(str1, "lazy", "fast"));
-console.log("split", mySplit(str1, " "));
 
 // console.log("DEEP_COPY__OBJ", newObj);
 // console.log("DEEP_COPY__ARR", newArr);
@@ -204,3 +136,20 @@ console.log("split", mySplit(str1, " "));
 // console.log("#1", countAllVowels(str));
 // console.log("#2", reverseReverse(str));
 // console.log("#8", capitalizeFirstWord(str));
+
+function sayHello(city, lastname) {
+  console.log(`hello there ${this.name} ${lastname} ${city}`);
+}
+
+Function.prototype.myBind = function (...args) {
+  let obj = this;
+  let arg = args[0];
+  let params = args.slice(1);
+  return function (...args1) {
+    obj.apply(arg, [...params, ...args1]);
+  };
+};
+
+const obj12 = { name: "saurav" };
+const polyfillBind = sayHello.myBind(obj12, "silchar");
+polyfillBind("Biswas");
