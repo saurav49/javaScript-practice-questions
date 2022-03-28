@@ -137,19 +137,36 @@ deepCopy(obj, "");
 // console.log("#2", reverseReverse(str));
 // console.log("#8", capitalizeFirstWord(str));
 
-function sayHello(city, lastname) {
-  console.log(`hello there ${this.name} ${lastname} ${city}`);
-}
-
-Function.prototype.myBind = function (...args) {
-  let obj = this;
-  let arg = args[0];
-  let params = args.slice(1);
-  return function (...args1) {
-    obj.apply(arg, [...params, ...args1]);
+let user = (function () {
+  let name = "Saurav";
+  return {
+    getName: (_) => name,
+    setName: (newName) => (name = newName),
   };
-};
+})();
 
-const obj12 = { name: "saurav" };
-const polyfillBind = sayHello.myBind(obj12, "silchar");
-polyfillBind("Biswas");
+console.log(user.getName());
+console.log(user.setName("John"));
+console.log(user.getName());
+
+const timeBomb1 = () => {
+  for (var i = 0; i <= 5; i++) {
+    (function (x) {
+      setTimeout(() => {
+        console.log(x);
+      }, x * 1000);
+    })(i);
+  }
+};
+timeBomb1();
+
+const radius = [3, 1, 2, 4];
+
+const areaOfCircles = radius.map((r) => Math.floor(Math.PI * r * r));
+const circumferemceOfCircles = radius.map((r) => 2 * Math.PI * r);
+const diameterOfCircles = radius.map((r) => 2 * r);
+console.log(
+  { areaOfCircles },
+  { circumferemceOfCircles },
+  { diameterOfCircles }
+);
