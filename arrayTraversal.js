@@ -26,3 +26,40 @@ const resArr = arr1.reduce((acc, ele) => {
   return acc;
 }, []);
 console.log({ resArr });
+
+// currying
+// function curry(f) {
+//   return function (x) {
+//     return function (y) {
+//       return f(x, y);
+//     };
+//   };
+// }
+
+const adder = (x, y) => x + y;
+
+// console.log(curry(adder)(2)(5));
+
+function curry(x) {
+  return function (y) {
+    return x * y;
+  };
+}
+
+let multiplyByTwo = curry(2);
+console.log(multiplyByTwo(8));
+
+// composition : composing two functions together
+// currying: calling functions with some args now and some args later, done with bind or closure
+// currySum(1)(2)(3)()
+
+const currySum = (a) => {
+  return (b) => {
+    if (b) {
+      return currySum(a + b);
+    }
+    return a;
+  };
+};
+
+console.log(currySum(1)(2)(3)(4)());
