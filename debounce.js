@@ -51,4 +51,4 @@ function throttle(fn, delay) {
   };
 }
 
-const getData = debounced(mockFetch, 300);
+// const getData = debounced(mockFetch, 300);
