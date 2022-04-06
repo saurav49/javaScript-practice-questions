@@ -54,7 +54,7 @@ console.log(multiplyByTwo(8));
 // currySum(1)(2)(3)()
 
 const currySum = (a) => {
-  return (b) => {
+  return function (b) {
     if (b) {
       return currySum(a + b);
     }
@@ -62,4 +62,4 @@ const currySum = (a) => {
   };
 };
 
-console.log(currySum(1)(2)(3)(4)());
+console.log(currySum(1)(2)(3)());
