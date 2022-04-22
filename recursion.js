@@ -42,3 +42,25 @@ const redditComments = [
     ],
   },
 ];
+
+// const recurCountToTen = (num) => {
+//   if (num > 10) return;
+//   console.log(num);
+//   num++;
+//   recurCountToTen(num);
+// };
+
+// recurCountToTen(0);
+
+// fibonacci
+// 0, 1, 1, 2, 3, 5, 8, 13, 21
+let res = [0];
+const fiboc = (series, num) => {
+  if (series <= 0) return res;
+  series--;
+  res.push(num);
+  fiboc(series, res[res.length - 1] + res[res.length - 2]);
+};
+
+const fibocRes = fiboc(13, 1);
+console.log(res);

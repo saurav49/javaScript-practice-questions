@@ -122,3 +122,12 @@ promise_all(
 // )
 //   .then((res) => console.log(res))
 //   .catch((err) => console.error(err));
+for (var i = 0; i < 5; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, 100);
+}
+
+const s = "123456";
+const x = parseInt(s.substr(3, 2)) + 5;
+console.log({ x }, s.substr(3, 2));

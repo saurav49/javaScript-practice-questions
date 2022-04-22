@@ -43,3 +43,14 @@ const multiply = (...args) =>
   args.reduce((acc, currValue) => acc * currValue, 1);
 const mulMemoize = memoize(multiply);
 console.log("mulMemoize", mulMemoize(2, 4));
+
+function memoizedFn(fn) {
+  let cache = {};
+
+  return function (...args) {
+    if (!cache[args.toString()]) {
+      cache[args.toString()] = fn.call(this, ...args);
+    }
+    return cache[args.toString()];
+  };
+}
