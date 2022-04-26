@@ -16,6 +16,7 @@
 // };
 
 // const finalGetData = debounce(getData, 300);
+
 var lis = document.querySelectorAll("ul li");
 console.log(lis);
 

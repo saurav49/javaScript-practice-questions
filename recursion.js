@@ -64,3 +64,10 @@ const fiboc = (series, num) => {
 
 const fibocRes = fiboc(13, 1);
 console.log(res);
+
+const val = 0;
+const fibocNth = (place, num) => {
+  if (place <= 1) return;
+  place--;
+  fiboc(place, num + val);
+};
