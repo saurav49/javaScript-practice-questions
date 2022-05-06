@@ -12,7 +12,7 @@ Function.prototype.myBind = function (obj, ...args) {
 };
 const runMyBind = displayName.myBind(obj1, "param1", "param2");
 const originalBind = displayName.bind(obj1, "para1", "para2");
-runMyBind("param30");
+runMyBind("param3");
 originalBind("para30");
 // call
 Function.prototype.myCall = function (obj, ...args) {
@@ -50,25 +50,15 @@ var objs = [
   { first_nom: "potato", price: "10" },
   { first_nom: "tomato", price: "1" },
 ];
+// If the compare function returns less than 0, then the sort() method sorts a at a lower index than b. Simply a will come before b.
+// If the compare function returns equal to 0, then the sort() method leaves the element positions as they are.
+// If the compare function returns greater than 0, then the sort() method sorts a at greater index than b. Simply a will come after b.
 
 console.log(objs.sort((a, b) => a.price - b.price));
-
 // flatten deep
 const flattenDeep = [1, [2, [3, 4], 5], 6, [7, 8, 9], [10]];
 
-const flattenDeepArr = (arr) => {
-  let res = [];
-
-  for (let ele of arr) {
-    console.log(ele, typeof ele);
-    if (typeof ele !== "object") {
-      res.push(ele);
-    } else {
-      res = [...res, ...flattenDeepArr(ele)];
-    }
-  }
-  return res;
-};
+const flattenDeepArr = (arr) => {};
 
 console.log(flattenDeepArr(flattenDeep));
 
