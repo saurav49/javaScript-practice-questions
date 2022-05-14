@@ -170,3 +170,103 @@ function findAllSubstring(word) {
 }
 
 console.log(findAllSubstring("abaab"));
+
+// ROC8 QUESTION BANK
+// WAP to replicate map function without using map
+const arr2 = [1, 2, 3];
+Array.prototype.myMap = function (fn) {
+  let arr = this;
+  let res = [];
+  for (let i = 0; i < arr.length; i++) {
+    res.push(fn(arr[i], i));
+  }
+  return res;
+};
+
+console.log(
+  "myMap",
+  arr2.myMap((val, idx) => val + idx)
+); // 1, 3, 5
+
+// recursion solution to finding a factorial
+function factorial(num) {
+  if (num === 0) {
+    return 1;
+  }
+  if (num === 1) {
+    return num;
+  }
+  let res = num * factorial(num - 1);
+  return res;
+}
+console.log("factorial", factorial(5)); // 120
+
+// Sum of digits at even places of a number
+function sumOfEvenPlaces(num) {
+  let numArr = num.toString().split("");
+  let res = 0;
+  for (let i = 1; i <= numArr.length; i++) {
+    if (i % 2 === 0) {
+      res += +numArr[i - 1];
+    }
+  }
+  return res;
+}
+
+console.log(sumOfEvenPlaces(54873)); // 11E, 16O
+
+// rotate string and Pyramid pattern print
+const strRotate = "Hello there";
+const rotateStr = (str) => {
+  let res = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    res += str[i];
+  }
+  return res;
+};
+console.log("rotateStr", rotateStr(strRotate));
+// *
+// * *
+//* * *
+const drawPyramid = (n) => {
+  while (n > 0) {
+    let line = "";
+    for (let i = 0; i < n; i++) {
+      line += "*";
+    }
+    n -= 1;
+    console.log(line);
+  }
+};
+drawPyramid(3);
+(function () {
+  let count = 0;
+  function incrementCount() {
+    count += 1;
+    console.log(count);
+  }
+  incrementCount();
+})();
+
+function Memoization(fn) {
+  let cache = {};
+  return function (num1, num2) {
+    if (cache[`${num1}${num2}`]) return cache[`${num1}${num2}`];
+    cache[`${num1}${num2}`] = fn(num1, num2);
+    return cache[`${num1}${num2}`];
+  };
+}
+
+function addNums(num1, num2) {
+  for (let i = 0; i < 1000000000; i++) {}
+  return num1 + num2;
+}
+
+const memoizedSum = Memoization(addNums);
+console.time("first call");
+console.log(memoizedSum(5, 3));
+console.timeEnd("first call");
+
+console.time("second call");
+console.log(memoizedSum(5, 3));
+console.timeEnd("second call");
