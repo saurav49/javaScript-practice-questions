@@ -270,3 +270,33 @@ console.timeEnd("first call");
 console.time("second call");
 console.log(memoizedSum(5, 3));
 console.timeEnd("second call");
+
+function fakeFetch(msg, delay) {
+  return new Promise((resolve, reject) => {
+    if (typeof delay !== "number") {
+      return reject(new Error("delay should be  of type number"));
+    }
+    setTimeout(() => {
+      return resolve({
+        success: true,
+        msg,
+      });
+    }, delay);
+  });
+}
+
+Promise.all([fakeFetch("hello1", 3000), fakeFetch("hello2", 2000)])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+Promise.race([fakeFetch("hello1", 2500), fakeFetch("hello2", 3000)])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
