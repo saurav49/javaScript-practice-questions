@@ -72,3 +72,86 @@ const arr2 = [2, 4];
 
 //     }
 // }
+
+let arrObj = [
+  { name: "john", age: 23 },
+  { name: "jane", age: 22 },
+];
+
+function insertAtIndex(arr, obj, idx) {
+  if (idx > arr.length || idx < 0) {
+    return -1;
+  } else if (idx === 0) {
+    return [obj, ...arr];
+  } else if (idx === arr.length) {
+    return [...arr, obj];
+  } else {
+    let res = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (i === idx) {
+        res.push(obj);
+        res.push(arr[i]);
+      } else {
+        res.push(arr[i]);
+      }
+    }
+    return res;
+    // return [...arr.slice(0, idx), obj, ...arr.slice(idx)];
+  }
+}
+
+arrObj = insertAtIndex(arrObj, { name: "max", age: 18 }, 1);
+console.log(arrObj);
+arrObj = insertAtIndex(arrObj, { name: "mox", age: 28 }, 2);
+console.log(arrObj);
+
+function traverse(obj) {
+  return [
+    {
+      title: obj["data"][0].attributes.title,
+      authorName: obj["included"].find(
+        (people) => people.id === obj["data"][0].relationship.author.data.id
+      ).attributes.name,
+      message: `${
+        obj["included"].find(
+          (people) => people.id === obj["data"][0].relationship.author.data.id
+        ).attributes.name
+      }, who is ${
+        obj["included"].find(
+          (people) =>
+            people.id ===
+            obj["data"][0].relationship.author.data.id[0].relationship.author
+              .data.id
+        ).attributes.age
+      } years, said following; ${data[0].attributes.body} `,
+    },
+  ];
+}
+
+traverse({
+  data: [
+    {
+      type: "articles",
+      id: 1,
+      attributes: {
+        title: "",
+        body: "",
+        created: "",
+        updated: "",
+      },
+      relationship: {
+        author: {
+          data: { id: 42, type: "people" },
+        },
+      },
+    },
+  ],
+  included: [
+    {
+      type: "people",
+      id: 42,
+      age: 80,
+      gender: "male",
+    },
+  ],
+});
