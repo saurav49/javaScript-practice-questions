@@ -224,14 +224,35 @@ function flattenArr(arr) {
 console.log(arr.flat(2));
 console.log(flattenArr(arr));
 
-function a() {
-  for (var i = 0; i < 3; i++) {
-    (function (x) {
-      setTimeout(() => {
-        console.log(x);
-      }, i * 1000);
-    })(i);
+// techsith interview
+let arr1 = [1, 2, 5, 7];
+
+console.log(
+  "reduce",
+  arr1.reduce((acc, currValue) => acc + currValue, 0)
+);
+
+function add(...arr) {
+  if (arr.length > 1) {
+    return arr.reduce((acc, currValue) => acc + currValue, 0);
+  }
+  return function (b) {
+    return [...arr, b].reduce((acc, currValue) => acc + currValue, 0);
+  };
+}
+
+console.log(add(1, 2));
+console.log(add(1)(2));
+
+const ary = [2, 1, 5, 3, 4, 10, 9, 6, 7]; // 1 number is missing, find the missing number
+console.log();
+function findMissingNum(arr) {
+  let arr1 = arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr[i] !== i + 1) {
+      return i + 1;
+    }
   }
 }
 
-a();
+console.log(findMissingNum(ary)); // O(n)
