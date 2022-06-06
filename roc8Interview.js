@@ -203,56 +203,114 @@
 
 // console.log(mergeArr(a, b));
 
-let arr = [
-  [1, 2],
-  [3, 4],
-  [5, 6, [7, 8], 9],
-  [10, 11, 12],
-];
-function flattenArr(arr) {
-  let res = [];
-  for (let ele of arr) {
-    if (Array.isArray(ele)) {
-      res = [...res, ...flattenArr(ele)];
-    } else {
-      res.push(ele);
-    }
-  }
-  return res;
-}
-
-console.log(arr.flat(2));
-console.log(flattenArr(arr));
-
 // techsith interview
-let arr1 = [1, 2, 5, 7];
+const arr = [1, 2, 5, 7];
+console.log(arr.reduce((acc, currValue) => acc + currValue, 0));
 
-console.log(
-  "reduce",
-  arr1.reduce((acc, currValue) => acc + currValue, 0)
-);
-
-function add(...arr) {
+const add = (...arr) => {
   if (arr.length > 1) {
     return arr.reduce((acc, currValue) => acc + currValue, 0);
   }
-  return function (b) {
-    return [...arr, b].reduce((acc, currValue) => acc + currValue, 0);
+
+  return (b) => {
+    return arr[0] + b;
   };
-}
+};
 
 console.log(add(1, 2));
 console.log(add(1)(2));
 
-const ary = [2, 1, 5, 3, 4, 10, 9, 6, 7]; // 1 number is missing, find the missing number
-console.log();
-function findMissingNum(arr) {
-  let arr1 = arr.sort((a, b) => a - b);
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr[i] !== i + 1) {
-      return i + 1;
-    }
+const ary = [2, 3, 5, 1];
+
+const len = ary.length + 1;
+let sum = 0;
+for (let i = 1; i <= len; i++) {
+  sum += i;
+}
+const arySum = ary.reduce((acc, currValue) => acc + currValue, 0);
+console.log(sum - arySum);
+let str = " i love javascript";
+
+function revStr(str) {
+  let strRev = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    strRev += str[i];
   }
+  return str.split("").reverse().join("");
+  return strRev;
 }
 
-console.log(findMissingNum(ary)); // O(n)
+console.log(revStr(str));
+
+// mock__3
+const ar1 = [2, 3, 1, 4];
+
+function minAndMax(arr) {
+  const sortedArr = arr.sort((a, b) => a - b);
+  const maxArr = sortedArr.slice(1, arr.length);
+  const minArr = sortedArr.slice(0, arr.length - 1);
+  return {
+    max: maxArr.reduce((acc, currValue) => acc + currValue, 0),
+    min: minArr.reduce((acc, currValue) => acc + currValue, 0),
+  };
+}
+
+console.log(minAndMax(ar1));
+
+let x = 123456;
+function lengthOfNum(x) {
+  let len = 0;
+  let num = x;
+  while (num > 0) {
+    num = Math.floor(num / 10);
+    len += 1;
+  }
+  return len;
+}
+
+console.log(lengthOfNum(x));
+
+let y = [1, 2, 2, 4, 2, 4, 3, 4, 1, 4];
+
+function countOfMax(arr) {
+  const sortedArr = arr.sort((a, b) => b - a); // o(n)
+
+  const maxNum = sortedArr[0];
+  let res = 0;
+  for (let i = 1; i < sortedArr.length; i++) {
+    // o(n)
+    if (sortedArr[i] === maxNum) {
+      res += 1;
+    }
+    if (sortedArr[i] < maxNum) {
+      break;
+    }
+  }
+  return res + 1;
+}
+console.log(countOfMax(y));
+
+const convertToMilitary = (time) => {
+  let [hr, min] = time.split(":");
+  let day = "",
+    currMin = "";
+  for (let i = 0; i < min.length; i++) {
+    // o(n)
+    if (min[i] === "A" || min[i] === "P") {
+      day = min[i] === "A" ? "AM" : "PM";
+      break;
+    } else {
+      currMin += min[i];
+    }
+  }
+  if (day === "AM") {
+    if (hr === "12") {
+      return `00:${currMin}AM`;
+    }
+    return time;
+  } else {
+    hr = 12 + parseInt(hr);
+    return `${hr}:${currMin}PM`;
+  }
+};
+console.log(convertToMilitary("12:30AM"));
