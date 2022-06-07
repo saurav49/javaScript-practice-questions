@@ -314,3 +314,57 @@ const convertToMilitary = (time) => {
   }
 };
 console.log(convertToMilitary("12:30AM"));
+
+const profile = {
+  name: "peter",
+  age: 56, // 56+23+3 = 82
+
+  kids: [
+    {
+      name: "jill",
+      age: 23,
+      kids: [
+        {
+          name: "jeter",
+          age: 1,
+        },
+        {
+          name: "bill",
+          age: 2,
+        },
+      ],
+    },
+  ],
+};
+
+function ageCalc(profile) {
+  let age = 0;
+  if (profile.hasOwnProperty("age")) {
+    age += profile["age"]; // age = 56
+  }
+
+  if (profile.hasOwnProperty("kids")) {
+    for (let ele of profile["kids"]) {
+      age += ageCalc(ele);
+    }
+    return age;
+  } else {
+    return age;
+  }
+}
+
+console.log(ageCalc(profile));
+
+function genRandom(num) {
+  return Math.floor(Math.random() * num);
+}
+
+function kidsProblem() {
+  for (let i = 1; i <= 5; i++) {
+    let num1 = Math.floor(Math.random() * (i + 1 - i) + i);
+    let num2 = Math.floor(Math.random() * (i - 1 - i) + i);
+    console.log(`${num1} + ${num2} = `);
+  }
+}
+
+kidsProblem();

@@ -23,14 +23,22 @@ const printFullName = function (hometown, state) {
 let getFullName = printFullName.bind(nameObj, "Silchar");
 getFullName("Assam");
 
+var bindGetter = printFullName.bind(nameObj, "arg");
+bindGetter("arg1", "arg2");
 //My__BIND
-Function.prototype.mybind = function (...args) {
-  let obj = this;
-  const params = args.slice(1);
-  return function (...args1) {
-    obj.apply(args[0], [...params, ...args1]);
+Function.prototype.myBind = function (scope, ...arg) {
+  let fn = this;
+  return function (...arg1) {
+    fn.call(scope, ...arg, ...arg1);
   };
 };
+// Function.prototype.mybind = function (...args) {
+//   let obj = this;
+//   const params = args.slice(1);
+//   return function (...args1) {
+//     obj.apply(args[0], [...params, ...args1]);
+//   };
+// };
 
-let getmyBindFullName = printFullName.mybind(nameObj, "Silchar", "Assam");
+let getmyBindFullName = printFullName.myBind(nameObj, "Silchar", "Assam");
 getmyBindFullName();
