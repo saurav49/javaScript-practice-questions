@@ -355,16 +355,71 @@ function ageCalc(profile) {
 
 console.log(ageCalc(profile));
 
-function genRandom(num) {
-  return Math.floor(Math.random() * num);
-}
+// function genRandom(num) {
+//   return Math.floor(Math.random() * num);
+// }
 
-function kidsProblem() {
-  for (let i = 1; i <= 5; i++) {
-    let num1 = Math.floor(Math.random() * (i + 1 - i) + i);
-    let num2 = Math.floor(Math.random() * (i - 1 - i) + i);
-    console.log(`${num1} + ${num2} = `);
+// function kidsProblem() {
+//   for (let i = 1; i <= 5; i++) {
+//     let num1 = Math.floor(Math.random() * (i + 1 - i) + i);
+//     let num2 = Math.floor(Math.random() * (i - 1 - i) + i);
+//     console.log(`${num1} + ${num2} = `);
+//   }
+// }
+
+// kidsProblem();
+
+const num = 1212;
+
+const getCount = (num) => {
+  let count = 0;
+  while (num > 0) {
+    num = Math.floor(num / 10);
+    count += 1;
   }
+  return count;
+};
+const isPalindromeNum = (num) => {
+  let count = getCount(num); // o(n)
+  let revNum = 0;
+  let numOrg = num;
+  while (numOrg > 0) {
+    // o(n2)
+    let num1 = numOrg % 10;
+    numOrg = Math.floor(numOrg / 10);
+    if (count > 0) {
+      let multiplier = 1;
+      for (let i = 1; i < count; i++) {
+        multiplier *= 10;
+      }
+      revNum += num1 * multiplier;
+    }
+    count -= 1;
+  }
+  console.log({ revNum, numOrg, num });
+  return revNum === num;
+};
+
+console.log(isPalindromeNum(num));
+
+function product(a) {
+  return function (b) {
+    console.log(a * b);
+  };
 }
 
-kidsProblem();
+product(4)(5);
+console.log(parseInt([1, 2, 5, 2, 1].join("")));
+
+console.log("1");
+setTimeout(() => {
+  console.log("st");
+}, 0);
+Promise.resolve()
+  .then(function () {
+    console.log("p1");
+  })
+  .then(function () {
+    console.log("p2");
+  });
+console.log("2");

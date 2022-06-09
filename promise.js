@@ -73,3 +73,10 @@ promise_all(
 )
   .then((res) => console.log(res))
   .catch((err) => console.error(err));
+
+//
+
+const x = [1, 2, 3];
+x[-1] = -1;
+
+console.log(x, x[x.indexOf(10000)], x.indexOf(10000));
