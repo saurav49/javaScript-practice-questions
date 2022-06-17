@@ -1,21 +1,3 @@
-// Debounce
-const productname = document.querySelector("#productname");
-const dataHandler = () => {
-  console.log(productname.value);
-};
-const debounce = (fn, delay) => {
-  let timer;
-  return function () {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      fn();
-    }, delay);
-  };
-};
-const getData = debounce(dataHandler, 300);
-
-const throttle = (fn, delay) => {};
-
 // ILLEGAL SHADOW
 // function test() {
 //   var a = "hello";
@@ -163,3 +145,77 @@ const throttle = (fn, delay) => {};
 // };
 
 // fun();
+
+let nums = {
+  a: 100,
+  b: 200,
+  title: "My Numbs",
+};
+
+const multiplyNumeric = (obj) => {
+  for (let key in obj) {
+    if (typeof obj[key] === "number") {
+      obj[key] *= 2;
+    }
+  }
+};
+
+console.log(multiplyNumeric(nums));
+console.log(nums);
+
+const a = {};
+const b = { key: "b" };
+const c = { key: "c" };
+
+a[JSON.stringify(b)] = 123;
+a[JSON.stringify(c)] = 456;
+
+console.log(a);
+
+function countOnes(str) {
+  let flag = "STARTED";
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === "1" && flag === "STARTED") {
+      flag = "ONE";
+      count += 1;
+    } else if (str[i] === "0" && flag === "ONE") {
+      flag = "ZERO";
+    } else if (str[i] === "1" && flag === "ZERO") {
+      flag = "ONE";
+      count += 1;
+    }
+  }
+  return count;
+}
+console.log(countOnes("001001"));
+console.log(countOnes("1111111"));
+console.log(countOnes("010101"));
+console.log(countOnes("1010"));
+console.log(countOnes("0111"));
+console.log(countOnes("11101"));
+
+const binarySearch = (arr, target) => {
+  let start = 0;
+  let end = arr.length - 1;
+  let mid = Math.floor((start + end) / 2);
+
+  while (start < end) {
+    if (arr[mid] === target) {
+      return mid;
+    } else if (arr[mid] > target) {
+      end = mid - 1;
+      mid = Math.floor((start + end) / 2);
+    } else {
+      start = mid + 1;
+      mid = Math.floor((start + end) / 2);
+    }
+  }
+};
+
+console.log(
+  binarySearch(
+    [0, 1, 5, 3].sort((a, b) => a - b),
+    3
+  )
+);
