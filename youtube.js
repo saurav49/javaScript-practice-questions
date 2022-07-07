@@ -219,3 +219,31 @@ console.log(
     3
   )
 );
+
+const shape = {
+  radius: 10,
+  diameter() {
+    return this.radius * 2;
+  },
+  // perimeter: () => {
+  //   return () => {
+  //     console.log(this);
+  //     return 2 * Math.PI * this.radius;
+  //   };
+  // },
+};
+
+console.log(shape.diameter());
+let person = { name: "saurav" };
+const members = [person];
+person = null;
+
+console.log(members, person);
+
+for (var i = 0; i < 5; i++) {
+  (function (x) {
+    setTimeout(function () {
+      console.log(x);
+    }, x * 1000);
+  })(i);
+}

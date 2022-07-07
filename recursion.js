@@ -1,17 +1,17 @@
 // FLATTEN AN ARRAY
 const flattenArr = [1, [2, [3, 4], 5], 6];
-let newArr = [];
 const getFlattenArr = (arr) => {
+  let newArr = [];
   for (let ele of arr) {
-    if (typeof ele === "object") {
-      getFlattenArr(ele);
-    } else {
+    if (typeof ele !== "object") {
       newArr.push(ele);
+    } else {
+      newArr = [...newArr, ...getFlattenArr(ele)];
     }
   }
+  return newArr;
 };
-getFlattenArr(flattenArr);
-console.log(newArr);
+console.log(getFlattenArr(flattenArr));
 
 const redditComments = [
   {
