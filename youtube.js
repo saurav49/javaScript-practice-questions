@@ -240,10 +240,93 @@ person = null;
 
 console.log(members, person);
 
-for (var i = 0; i < 5; i++) {
-  (function (x) {
-    setTimeout(function () {
-      console.log(x);
-    }, x * 1000);
-  })(i);
+const createBase = (num) => {
+  return function (num1) {
+    return num + num1;
+  };
+};
+
+var addSix = createBase(6);
+console.log(addSix(10));
+console.log(addSix(21));
+
+// module pattern
+var module = (function () {
+  var count = 5;
+  function privateMethod() {
+    console.log(count);
+  }
+  return {
+    publicMethod: function () {
+      privateMethod();
+    },
+  };
+})();
+
+module.publicMethod();
+
+// make the function run only once
+function likeTheVid() {
+  let called = 0;
+  return function () {
+    if (called === 0) {
+      console.log("hello");
+      called += 1;
+    }
+  };
 }
+const like = likeTheVid();
+like();
+like();
+like();
+
+function evaluate(type) {
+  return function (a) {
+    return function (b) {
+      switch (type) {
+        case "sum":
+          return a + b;
+        case "multiply":
+          return a * b;
+        case "divide":
+          return a / b;
+        case "substract":
+          return a - b;
+        default:
+          console.log("something went wrong in switch statements");
+      }
+    };
+  };
+}
+
+console.log(evaluate("sum")(4)(2));
+console.log(evaluate("multiply")(4)(2));
+console.log(evaluate("divide")(4)(2));
+console.log(evaluate("substract")(4)(2));
+
+// convert fn(a, b, c) to fn(a)(b)(c)
+function curry(fn) {
+  return function curriedFun(...args) {
+    if (args.length >= fn.length) {
+      return fn(...args);
+    } else {
+      return function (...next) {
+        return curriedFun(...args, ...next);
+      };
+    }
+  };
+}
+
+const sum = (a, b, c, d) => a + b + c + d;
+const totalSum = curry(sum);
+console.log(totalSum(1)(2)(3)(4));
+
+const a1 = {};
+const b1 = { key: "b" };
+const c1 = { key: "c" };
+
+a1[JSON.stringify(b1)] = 123;
+console.log(a1);
+a1[JSON.stringify(c1)] = 456;
+
+console.log(a1);
