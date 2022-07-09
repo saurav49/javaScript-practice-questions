@@ -84,3 +84,41 @@ printFullName.myCall(name1, "new delhi", "delhi");
 printFullName.myApply(name2, ["mumbai", "maharashtra"]);
 const caller = printFullName.myBind(name1, "ghy");
 caller("assam1");
+
+let calculator = {
+  a: 0,
+  b: 0,
+  read(a, b) {
+    this.a = a;
+    this.b = b;
+  },
+  sum() {
+    return this.a + this.b;
+  },
+  mul() {
+    return this.a * this.b;
+  },
+};
+
+calculator.read(3, 2);
+console.log(calculator.sum());
+console.log(calculator.mul());
+
+let calc = {
+  total: 0,
+  add(a) {
+    this.total += a;
+    return this;
+  },
+  multiply(a) {
+    this.total *= a;
+    return this;
+  },
+  subtract(a) {
+    this.total -= a;
+    return this;
+  },
+};
+
+const result = calc.add(10).multiply(5).subtract(30).add(25);
+console.log(result.total);
