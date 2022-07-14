@@ -119,3 +119,114 @@ const sumOfDigitsAtEvenPlaces = (num) => {
   return res;
 };
 console.log(sumOfDigitsAtEvenPlaces(3253));
+
+// Write a JS func that takes an obj and a callback, execute the cb after 3 sec
+// const delayCB = (obj, cb) => {
+//   setTimeout(() => {
+//     cb(obj);
+//   }, 3000);
+// };
+
+// function callb(obj) {
+//   console.log(obj.name);
+// }
+
+// delayCB({ name: "saurav" }, callb);
+
+// WAP to replicate map function without using map
+Array.prototype.myMap = function (cb) {
+  let arr = this;
+  let res = [];
+  for (let i = 0; i < arr.length; i++) {
+    res.push(cb(arr[i], i, arr));
+  }
+  return res;
+};
+
+console.log([2, 1, 4, 3].myMap((ele, i, arr) => ele * 2));
+
+// let arr = [ " ( ", " } ", " ] " , " { ", " ) ", " [ " ]; to ["(", ")", "{", "}", "[", "]"] sort the array with pairs catch: a left brace has a high priority over right brace so in case of left brace "(" so we have to find it first pair ")" .
+let arrBracket = [" ( ", " } ", " ] ", " { ", " ) ", " [ "];
+const arrBracFun = (arr) => {
+  let res = [];
+  for (let ele of arr) {
+    if (ele === " ( ") {
+      res = [...res, "(", ")"];
+    } else if (ele === " { ") {
+      res = [...res, "{", "}"];
+    } else if (ele === " [ ") {
+      res = [...res, "[", "]"];
+    }
+  }
+  return res;
+};
+console.log(arrBracFun(arrBracket));
+
+// fun to check prime or not
+const isPrime = (num) => {
+  for (let i = 2; i < num; i++) {
+    if (num % 2 === 0) {
+      return false;
+    }
+  }
+  return true;
+};
+console.log(isPrime(7));
+console.log(isPrime(13));
+console.log(isPrime(16));
+
+// Create a function that takes 3 arguments function, interval, and frequency. the function should execute as many times as the frequency
+//  we passed and there should be a delay equal to the interval
+//  we passed. For eg our(() => console.log("hi"), 2, 3)
+//  should print "hi" 3 times with a gap of 2 seconds between each execution.
+
+// const executeFnTimes = (cb, delay, times) => {
+//   for (let i = times; i > 0; i--) {
+//     (function (x) {
+//       setTimeout(() => {
+//         cb();
+//       }, delay * x * 1000);
+//     })(i);
+//   }
+// };
+
+// executeFnTimes(() => console.log("h1"), 2, 3);
+
+// recursion to find factorial and Fibonacci series.
+function factorial(num) {
+  let res = 1;
+  while (num > 0) {
+    res *= num;
+    num--;
+  }
+  return res;
+}
+console.log(factorial(5));
+
+function fibonacciSeries(num) {
+  if (num === 1) {
+    return 0;
+  }
+  if (num === 2) {
+    return 1;
+  }
+  return fibonacciSeries(num - 1) + fibonacciSeries(num - 2);
+}
+console.log(fibonacciSeries(8));
+
+// Write a function which takes an array and returns sub arrays. for eg if we pass [1, 1, 2, 2, 4, 4, 5, 5, 5] as input we should get [[1,1,2,2], [4,4,5,5,5]] as output. The consecutive difference between 2 numbers should be 1 || -1.
+
+// What is recursion? Pass an alphanumeric string to a recursive function and print if the character is a number, vowel, or consonant. eg. (“vivek123”)
+function recusrionStr(str) {
+  const numbs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  if (str.length > 0) {
+    if (
+      str[0].toUpperCase() !== str[0].toLowerCase() ||
+      numbs.includes(+str[0])
+    ) {
+      console.log(str[0]);
+    }
+    recusrionStr(str.slice(1, str.length));
+  }
+}
+recusrionStr("vive_k!123");
