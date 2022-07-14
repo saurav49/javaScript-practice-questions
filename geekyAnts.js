@@ -230,3 +230,48 @@ function recusrionStr(str) {
   }
 }
 recusrionStr("vive_k!123");
+
+function* generateId() {
+  let id = 0;
+  while (true) {
+    yield id;
+    id++;
+  }
+}
+
+const generatorObj = generateId();
+console.log(generatorObj.next().value);
+console.log(generatorObj.next().value);
+console.log(generatorObj.next().value);
+
+const arr1 = [1, 1, 2, 2, 4, 4, 5, 5, 5];
+
+function subArr(arr) {
+  let res = [];
+  let finalRes = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    console.log(
+      "here",
+      arr[i] - arr[i + 1],
+      arr[i] - arr[i + 1] === 1 ||
+        arr[i] - arr[i + 1] === 0 ||
+        arr[i] - arr[i - 1] === -1
+    );
+    if (
+      arr[i] - arr[i + 1] === 1 ||
+      arr[i] - arr[i + 1] === 0 ||
+      arr[i] - arr[i + 1] === -1
+    ) {
+      res.push(arr[i]);
+      console.log("here1", { res });
+    } else {
+      console.log("here2", { res });
+      res.length > 0 && finalRes.push(res);
+      res = [];
+    }
+  }
+
+  return finalRes;
+}
+
+console.log(subArr(arr1));
