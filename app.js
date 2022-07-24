@@ -170,3 +170,17 @@ console.log(
   { circumferemceOfCircles },
   { diameterOfCircles }
 );
+
+const btn = document.querySelector("#btn");
+btn.addEventListener("click", () => {
+  if (!btn.style["backgroundColor"]) {
+    btn.style["backgroundColor"] = "red";
+  }
+  console.log(
+    btn.style["backgroundColor"],
+    btn.style["backgroundColor"] === "red"
+  );
+  btn.style["backgroundColor"] === "red"
+    ? (btn.style["backgroundColor"] = "blue")
+    : (btn.style["backgroundColor"] = "coral");
+});
