@@ -275,3 +275,29 @@ function subArr(arr) {
 }
 
 console.log(subArr(arr1));
+
+Function.prototype.myMap = function (fn) {
+  let arr = this;
+  let res = [];
+  for (let i = 0; i < arr.length; i++) {
+    res.push(fn(arr[i], i, arr));
+  }
+};
+
+console.log([1, 2, 3].myMap((ele, i, arr) => ele * 3));
+
+function secondLargest(arr) {
+  const sortedArr = arr.sort((a, b) => a - b);
+  let alreadyFound = {};
+  let duplicateRemovedArr = [];
+  for (let ele of sortedArr) {
+    if (!alreadyFound[ele]) {
+      alreadyFound[ele] = ele;
+      duplicateRemovedArr.push(ele);
+    }
+  }
+  console.log({ duplicateRemovedArr });
+  return duplicateRemovedArr[duplicateRemovedArr.length - 2];
+}
+
+console.log(secondLargest([3, 1, 5, 7, 8, 10, 11, 12, 12, 10, 4]));

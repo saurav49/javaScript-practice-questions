@@ -43,3 +43,20 @@ const multiply = (...args) =>
   args.reduce((acc, currValue) => acc * currValue, 1);
 const mulMemoize = memoize(multiply);
 console.log("mulMemoize", mulMemoize(2, 4));
+
+const memo = (fn) => {
+  let cache = {};
+
+  return function (...args) {
+    if (args.toString() in cache) {
+      return cache[args.toString()];
+    }
+    const res = fn(...args);
+    cache[args.toString()] = res;
+    return res;
+  };
+};
+
+const sumNum = (a, b) => a + b;
+const memoSum = memo(sumNum);
+console.log(memoSum(2, 5));
